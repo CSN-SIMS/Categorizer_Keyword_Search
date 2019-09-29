@@ -49,7 +49,7 @@ dict_obj = {}
 for filename in listdir(directory):
     # create the full path of the file to open
     pathToFile = directory + '/' + filename
-    print("Occurrences of the keywords in the file " + filename + " are: ")
+    print("Occurrences of keywords in the file " + filename + " are: ")
     # search for keywords of the different categories in the file
     totalOccurrencesPayment = keywordSearch(pathToFile, listKeywordsPayment)
     totalOccurrencesCredits = keywordSearch(pathToFile, listKeywordsCredits)
