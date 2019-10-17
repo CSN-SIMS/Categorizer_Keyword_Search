@@ -10,6 +10,10 @@
 # categorizer.printResultInTable()
 # categorizer.saveTableResultInFile()
 
-from GUI_Categorizer import *
+from GUI_PageResult import *
+from GUI_PageOptions import *
+from GUI_PageDirectInput import *
 # Launch the GUI application for Categorization
-GUI()
+PageResult()
+PageOptions()
+PageDirectInput()

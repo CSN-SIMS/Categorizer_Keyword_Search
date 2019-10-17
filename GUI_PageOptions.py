@@ -4,7 +4,7 @@ from keywordSearch import *
 
 
 # Create GUI Application for Categorization of emails
-class GUI():
+class PageOptions():
     def __init__(self):
         self.root = Tk()
         self.createWidgets()
@@ -41,8 +41,8 @@ class GUI():
         # Middle frame with info message and button
         self.middle_frame = Frame(self.root, bg='#FFD164', bd=5)
         self.middle_frame.place(relx=0.5, rely=0.25, relwidth=0.85, relheight=0.1, anchor='n')
-        self.openFolder = Label(self.middle_frame, text="Open a folder with \ninput files", justify='center', bg='white',
-                              font=("Courier", 12))
+        self.openFolder = Label(self.middle_frame, text="Open a folder with \ninput files", justify='center', bg='white', fg='#EE7C7D',
+                              font=("Courier", 12,))
         self.openFolder.place(relx=0, rely=0, relwidth=0.65, relheight=1)
         self.button = Button(self.middle_frame, text="Browse", font=("Courier", 12), bg='#b3b3b3', activebackground='#f2d9e6',
                            command=lambda: self.fileDialog())
@@ -53,7 +53,7 @@ class GUI():
         self.lower_frame.place(relx=0.5, rely=0.35, relwidth=0.85, relheight=0.55, anchor='n')
         self.lower_frame.grid_rowconfigure(0, weight=1)
         self.lower_frame.grid_columnconfigure(0, weight=1)
-        self.results = Listbox(self.lower_frame, font=("Courier", 12), bg='white', justify='left', bd=3)
+        self.results = Listbox(self.lower_frame, font=("Courier", 12), bg='white', fg='#EE7C7D', justify='left', bd=3)
         self.results.grid(column=1, row=1, padx=10, ipady=10)
         self.results.place(relwidth=1, relheight=1)
         self.scrollbar_vertical = Scrollbar(self.lower_frame, orient=VERTICAL)
