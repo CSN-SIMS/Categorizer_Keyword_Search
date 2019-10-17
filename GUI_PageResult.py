@@ -68,8 +68,16 @@ class PageResult():
     # Gets the selected folder by the user and uses keywordSearch in txt files, then presents categories and file names
     def fileDialog(self):
         try:
+            
             self.folderSelected = filedialog.askdirectory()
             self.categorizer = Categorizer(self.folderSelected)
+
+            #1. Shows the amount of analyzed Emails
+            amountOfFiles = self.categorizer.amountOfFiles(self.folderSelected)
+            self.results.insert(END, "Amount of analysed Emails: " + str(amountOfFiles))
+            self.results.insert(END, "\n")
+
+            #Shows a List of categories with their emails
             self.dict_obj = self.categorizer.categorizeFilesFromDirectoryInMapAndSubDirectory()
             self.results.insert(END, "Category".ljust(20, ' ') + "File name")
             self.results.insert(END, "\n")
@@ -77,5 +85,6 @@ class PageResult():
                 self.results.insert(END, str(key).ljust(20, ' ') + str(val))
         except UnicodeDecodeError:
             self.results.insert(END, "Selected folder does not contain txt files.")
+
 
 

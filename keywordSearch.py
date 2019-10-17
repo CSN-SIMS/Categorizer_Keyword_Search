@@ -109,6 +109,14 @@ class Categorizer:
         f.write(tabulate(self.dict_obj.items(), headers, tablefmt="grid"))
         f.close()
 
+    def amountOfFiles(self, directory_Inputfiles):
+        counterOfEmails = 0
+        if not path.exists(directory_Inputfiles):
+            print('no folder exists')
+        for filename in listdir(directory_Inputfiles):
+            counterOfEmails = counterOfEmails + 1
+        return counterOfEmails
+
 # make lowercase of a word, remove special characters and digits, lemmatization of words like payment and payments
 def preprocessWordByTokenizeStemming(word):
     wordLower = word.lower()
@@ -145,3 +153,4 @@ def copyFileToUnderdirectory(pathToInputFile, category, filename):
         copyfile(pathToInputFile, pathToOutputFile)
     except FileNotFoundError:
         print("Error categorizing the file:" + filename)
+
