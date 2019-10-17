@@ -1,0 +1,26 @@
+”Hej!
+
+1. Jag är bosatt i Norge men har lån via CSN. Mitt svenska bankkonto är nu avslutat så jag kan inte få svenskt bank-id för överföringar från mitt norska konto, till er (så har jag betalt till er tidigare, via betalningskort).
+
+Detta medför att jag får påminnelseavgifter, för det är först då jag får min faktura. Kan ni komma med förslag på hur jag kan betala mitt lån framöver utan att få påminnelseavgifter? Kan ni skicka faktura till min bostadsadress i Norge? Något annat förslag?
+
+2. Kan ni skicka mig en ny faktura via min epost, med belopp jag ska betala till er?
+
+Ha en fin dag!”
+
+Svar:
+Hej XX!
+
+Enklast betalar du med Visa eller Mastercard på Mina Sidor, du behöver inte har ett konto i en svensk bank för att betala med kort.
+
+Jag ser att du valt att betala med e-faktura, det bör du avsluta om du inte längre har kvar det bankkonto dit e-fakturan skickas. När det är avslutat så skickas vanliga inbetalningskort till din adress i Norge.
+
+Du kan också alltid se vad som ska betalas och när på Mina Sidor, där finns också information om hur du kan betala från utlandet, till exempel med Iban:
+
+När du betalar från utlandet med IBAN behöver du ange uppgifterna här nedan. Avgiften kan variera beroende på vilket land du betalar från. För information om avgiften ska du kontakta din bank.
+
+För lån efter 30 juni 2001
+IBAN: SE9112000000012810111847
+BIC: DABASESX
+
+Vår BIC-adress är: DABASESX, Danske Bank, Norrmalmstorg 1, 103 92 Stockholm
