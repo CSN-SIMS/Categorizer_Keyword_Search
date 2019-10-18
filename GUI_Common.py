@@ -10,9 +10,7 @@ class Page(Frame):
 
 def backgroundSet(self):
     # Background
-    self.HEIGHT = 600
-    self.WIDTH = 800
-    self.canvas = Canvas(self, height=self.HEIGHT, width=self.WIDTH)
+    self.canvas = Canvas(self)
     self.background_label = Label(self, bg='#3C1E5F')
     self.background_label.place(relwidth=1, relheight=1)
     self.canvas.pack()
@@ -75,6 +73,10 @@ class Page1(Page):
        excelFileCheckbutton = Checkbutton(optionCanvas, text="Save as excel", variable=CheckVar, onvalue=1,
                                           offvalue=0, bg='white', font=("Courier bold", 12), height=5, width=20)
        excelFileCheckbutton.place(relx=0.1, rely=0.3, relwidth=0.3, relheight=0.15)
+       entryLabel = Label(optionCanvas, text="Enter name of the excel", bg='white', font=("Courier bold", 12))
+       entryLabel.place(relx=0.4, rely=0.32, relwidth=0.25, relheight=0.1)
+       entryContent = Entry(lower_frame, font=("Courier", 12,), justify='left', bd=2)
+       entryContent.place(relx=0.7, rely=0.32, relwidth=0.2, relheight=0.1)
        # open folder with input files
        openFolder = Label(optionCanvas, text="Open a folder with input files", justify='left',
                                bg='white',
@@ -133,29 +135,30 @@ class MainView(Frame):
 
         menu_frame = Frame(self, bg='#FFD164', bd=5)
         menu_frame.place(relx=0, rely=0, relwidth=1, relheight=0.2)
-        logo = Canvas(menu_frame, bd=1)
-        logo.place(relx=0, rely=0, relwidth=0.21, relheight=0.5)
-        img = PhotoImage(file="logo.png")
-        img = img.subsample(2)
-        logo.create_image(0, 0, anchor='nw', image=img)
+        #logo
+        self.logo = Canvas(menu_frame, bd=1)
+        self.logo.place(relx=0, rely=0, relwidth=1, relheight=0.8)
+        self.img = PhotoImage(file="logo.png")
+        self.img = self.img.subsample(6)
+        self.logo.create_image(0, 0, anchor='nw', image=self.img)
         var = "Sentiment analysis/Categorization"
         infoMessage = Message(menu_frame, text=var, justify='center', width=350,
                                    font=("Courier bold", 14))
         infoMessage.place(relx=0.5, rely=0.05, relwidth=0.4, relheight=0.5)
         button_frame = Frame(self, bg='#FFD164', bd=5)
-        button_frame.place(relx=0, rely=0.1, relwidth=1, relheight=0.3)
+        button_frame.place(relx=0, rely=0.135, relwidth=1, relheight=0.3)
         button1 = Button(button_frame, text="Options", font=("Courier", 12), bg='#EE7C7D',
                          activebackground='#f2d9e6',
                          command=p1.lift)
-        button1.place(relx=0.1, relwidth=0.2, relheight=1)
+        button1.place(relx=0.1, rely=0.25, relwidth=0.2, relheight=0.2)
         button2 = Button(button_frame, text="Result", font=("Courier", 12), bg='#EE7C7D',
                          activebackground='#f2d9e6',
                          command=p2.lift)
-        button2.place(relx=0.4, relwidth=0.2, relheight=1)
+        button2.place(relx=0.4, rely=0.25, relwidth=0.2, relheight=0.2)
         button3 = Button(button_frame, text="Direct input", font=("Courier", 12), bg='#EE7C7D',
                          activebackground='#f2d9e6',
                          command=p3.lift)
-        button3.place(relx=0.7, relwidth=0.2, relheight=1)
+        button3.place(relx=0.7, rely=0.25, relwidth=0.2, relheight=0.2)
 
         container = Frame(self)
         container.place(relx=0, rely=0.3, relwidth=1, relheight=0.7)
@@ -164,9 +167,6 @@ class MainView(Frame):
         p2.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
         p3.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
-        button1.pack(side="left")
-        button2.pack(side="left")
-        button3.pack(side="left")
 
         p1.show()
 
@@ -175,5 +175,5 @@ if __name__ == "__main__":
     main = MainView(root)
     main.pack(side="top", fill="both", expand=True)
     root.title("Sentiment Classification/Categorization Dialog Widget")
-    root.minsize(750, 550)
+    root.minsize(850, 650)
     root.mainloop()
