@@ -1,5 +1,5 @@
 from tkinter import Tk, Button, Frame, PhotoImage, Message, Canvas, Label, Listbox, Scrollbar, \
-    RIGHT, X, Y, END, BOTTOM, HORIZONTAL, VERTICAL, filedialog
+    RIGHT, X, Y, END, BOTTOM, HORIZONTAL, VERTICAL, filedialog, StringVar, OptionMenu, Checkbutton, IntVar
 from keywordSearch import *
 
 
@@ -34,36 +34,73 @@ class PageOptions():
         self.img = PhotoImage(file="logo.png")
         self.img = self.img.subsample(6)
         self.logo.create_image(0, 0, anchor='nw', image=self.img)
-        self.var = "Categorization of txt files from a given folder to sub-folders and presenting them in a table"
-        self.infoMessage = Message(self.higher_frame, text=self.var, justify='center', width=350, font=("Courier bold", 14))
+        self.var = "Sentiment Classification and Categorization of txt files"
+        self.infoMessage = Message(self.higher_frame, text=self.var, justify='center', width=350, font=("Courier bold", 16))
         self.infoMessage.place(relx=0.4, rely=0.05, relwidth=0.5, relheight=0.3)
 
-        # Middle frame with info message and button
-        self.middle_frame = Frame(self.root, bg='#FFD164', bd=5)
-        self.middle_frame.place(relx=0.5, rely=0.25, relwidth=0.85, relheight=0.1, anchor='n')
-        self.openFolder = Label(self.middle_frame, text="Open a folder with \ninput files", justify='center', bg='white', fg='#EE7C7D',
-                              font=("Courier", 12,))
-        self.openFolder.place(relx=0, rely=0, relwidth=0.65, relheight=1)
-        self.button = Button(self.middle_frame, text="Browse", font=("Courier", 12), bg='#b3b3b3', activebackground='#f2d9e6',
-                           command=lambda: self.fileDialog())
-        self.button.place(relx=0.7, relwidth=0.3, relheight=1)
+        # Menubar with Option, Result and Direct input
+        self.menubar()
 
         # Lower frame with scrollbars for displaying of categories and file names
         self.lower_frame = Frame(self.root, bg='#FFD164', bd=5)
         self.lower_frame.place(relx=0.5, rely=0.35, relwidth=0.85, relheight=0.55, anchor='n')
         self.lower_frame.grid_rowconfigure(0, weight=1)
         self.lower_frame.grid_columnconfigure(0, weight=1)
-        self.results = Listbox(self.lower_frame, font=("Courier", 12), bg='white', fg='#EE7C7D', justify='left', bd=3)
-        self.results.grid(column=1, row=1, padx=10, ipady=10)
-        self.results.place(relwidth=1, relheight=1)
-        self.scrollbar_vertical = Scrollbar(self.lower_frame, orient=VERTICAL)
-        self.scrollbar_vertical.pack(side=RIGHT, fill=Y)
-        self.scrollbar_vertical.configure(command=self.results.yview)
-        self.scrollbar_horizontal = Scrollbar(self.lower_frame, orient=HORIZONTAL)
-        self.scrollbar_horizontal.pack(side=BOTTOM, fill=X)
-        self.scrollbar_horizontal.configure(command=self.results.xview)
-        self.results.configure(yscrollcommand=self.scrollbar_vertical.set)
-        self.results.configure(xscrollcommand=self.scrollbar_horizontal.set)
+        self.optionCanvas = Canvas(self.lower_frame, bg='white', bd=3)
+        self.optionCanvas.place(relwidth=1, relheight=1)
+        # select language (English or Swedish)
+        self.selectLanguage(self.optionCanvas)
+        # open folder with input files
+        self.openFolder = Label(self.optionCanvas, text="Open a folder with input files", justify='left',
+                                bg='white',
+                                font=("Courier bold", 12))
+        self.openFolder.place(relx=0.1, rely=0.4, relwidth=0.3, relheight=0.2)
+        self.button = Button(self.optionCanvas, text="Browse", font=("Courier", 12), bg='#EE7C7D',
+                             activebackground='#f2d9e6',
+                             command=lambda: self.fileDialog())
+        self.button.place(relx=0.5, rely=0.4, relwidth=0.3, relheight=0.15)
+        # save result in excel file
+        self.CheckVar = IntVar()
+        self.excelFileCheckbutton = Checkbutton(self.optionCanvas, text="Save as excel", variable=self.CheckVar, \
+                         onvalue=1, offvalue=0, bg='white', font=("Courier bold", 12), height=5, width=20)
+        self.excelFileCheckbutton.place(relx=0.1, rely=0.6, relwidth=0.3, relheight=0.15)
+
+    # Middle frame with buttons bar
+    def menubar(self):
+        self.middle_frame = Frame(self.root, bg='#FFD164', bd=5)
+        self.middle_frame.place(relx=0.5, rely=0.25, relwidth=0.85, relheight=0.1, anchor='n')
+        self.button = Button(self.middle_frame, text="Options", font=("Courier", 12), bg='#EE7C7D',
+                             activebackground='#f2d9e6',
+                             command=lambda: self.fileDialog())
+        self.button.place(relx=0.1, relwidth=0.2, relheight=1)
+        self.button = Button(self.middle_frame, text="Result", font=("Courier", 12), bg='#EE7C7D',
+                             activebackground='#f2d9e6',
+                             command=lambda: self.fileDialog())
+        self.button.place(relx=0.4, relwidth=0.2, relheight=1)
+        self.button = Button(self.middle_frame, text="Direct input", font=("Courier", 12), bg='#EE7C7D',
+                             activebackground='#f2d9e6',
+                             command=lambda: self.fileDialog())
+        self.button.place(relx=0.7, relwidth=0.2, relheight=1)
+
+    # select language (English or Swedish)
+    def selectLanguage(self, parentWidget):
+        # Create a Tkinter variable
+        self.tkvar = StringVar()
+        # Dictionary with options
+        self.choices = {'English', 'Swedish'}
+        self.tkvar.set('English')  # set the default option
+        # Popup menu with languages
+        self.popupMenu = OptionMenu(parentWidget, self.tkvar, *self.choices)
+        self.popupLabel = Label(parentWidget, text="Choose a language", bg='white', justify='left',
+                                font=("Courier bold", 12))
+        self.popupLabel.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.2)
+        self.popupMenu.configure(bd=3, bg='#EE7C7D')
+        self.popupMenu.place(relx=0.5, rely=0.1, relwidth=0.3, relheight=0.15)
+        # on change dropdown value
+        def change_dropdown(*args):
+            print(self.tkvar.get())
+        # link function to change dropdown
+        self.tkvar.trace('w', change_dropdown)
 
     # Gets the selected folder by the user and uses keywordSearch in txt files, then presents categories and file names
     def fileDialog(self):
